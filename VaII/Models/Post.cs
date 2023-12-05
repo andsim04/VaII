@@ -15,7 +15,7 @@ namespace VaII_Sem.Models
         public int ID { get; set; }
         [Key]
         [ForeignKey("FK_User")]
-        public User UserID { get; set; }
+        public User UserFK { get; set; }
         [Required, MaxLength(50)]
         public string Title { get; set; }
         [Required, MaxLength(300)]
