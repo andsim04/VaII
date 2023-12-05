@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace VaII_Sem.Models
 {
-    public class ApplicationUser :IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Required, MaxLength(20, ErrorMessage = "Too long name :(")] 
         public string FirstName { get; set; }
@@ -16,8 +16,5 @@ namespace VaII_Sem.Models
         
 
         public ICollection<Post>? Posts;
-        
-
-
-    }
+     }
 }
