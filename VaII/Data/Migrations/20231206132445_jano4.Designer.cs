@@ -12,8 +12,8 @@ using VaII.Data;
 namespace VaII.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231206083854_nieco")]
-    partial class nieco
+    [Migration("20231206132445_jano4")]
+    partial class jano4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -242,13 +242,16 @@ namespace VaII.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("ApplicationUserFk")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("FK_User")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Latest")
                         .HasColumnType("datetime2");
@@ -256,14 +259,15 @@ namespace VaII.Data.Migrations
                     b.Property<bool>("Published")
                         .HasColumnType("bit");
 
+                    b.Property<byte[]>("ThumImage")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("FK_User");
 
                     b.ToTable("Posts", (string)null);
                 });
@@ -360,15 +364,6 @@ namespace VaII.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("VaII_Sem.Models.Post", b =>
-                {
-                    b.HasOne("VaII_Sem.Models.ApplicationUser", "ApplicationUserFk")
-                        .WithMany()
-                        .HasForeignKey("FK_User");
-
-                    b.Navigation("ApplicationUserFk");
                 });
 #pragma warning restore 612, 618
         }

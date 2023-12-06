@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Web.Helpers;
 using VaII.Data;
 using VaII_Sem.Models;
 
@@ -14,10 +16,17 @@ namespace VaII.Pages.Posts
     public class EditModel : PageModel
     {
         private readonly VaII.Data.ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public EditModel(VaII.Data.ApplicationDbContext context)
+        [BindProperty] 
+        public FileViewModel FileUpload { get; set; }
+
+        public EditModel(VaII.Data.ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _hostEnvironment = hostEnvironment;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -48,26 +57,45 @@ namespace VaII.Pages.Posts
                 return Page();
             }
 
-            _context.Attach(Post).State = EntityState.Modified;
-
-            try
+            using (var memoryStream = new MemoryStream())
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(Post.ID))
+                await FileUpload.FormFile.CopyToAsync(memoryStream);
+                if (memoryStream.Length < 2097152)
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
+                    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    var file = new Post()
+                    {
+                        Title = Post.Title,
+                        Description = Post.Description,
+                        ApplicationUserFk = await _userManager.GetUserIdAsync(user),
+                        Content = memoryStream.ToArray()
+                    };
+
+                    _context.Attach(file).State = EntityState.Modified;
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!PostExists(Post.ID))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
                 }
             }
 
-            return RedirectToPage("./Index");
-        }
+            
+
+                return RedirectToPage("./Index");
+            }
+        
 
         private bool PostExists(int id)
         {

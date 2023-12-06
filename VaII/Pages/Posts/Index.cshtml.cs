@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using VaII.Data;
 using VaII_Sem.Models;
+using System.Drawing ;
+using WebMatrix;
+
 
 namespace VaII.Pages.Posts
 {

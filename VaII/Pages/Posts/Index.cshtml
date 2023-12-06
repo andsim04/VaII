@@ -1,10 +1,14 @@
 ﻿@page
+@using System.Web.Helpers;
+
 @model VaII.Pages.Posts.IndexModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+
 
 <h1>Index</h1>
 
@@ -26,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Post[0].Latest)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Content)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +51,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Latest)
             </td>
+            @{
+                if (item.Content != null)
+                {
+                    WebImage photo = new WebImage(item.Content);
+                    photo.Resize(50, 50, true, true);
+                    var thumbnail = photo.GetBytes();
+
+
+                    <td>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(thumbnail)"/>
+                    </td>
+                }
+            }
+           
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
