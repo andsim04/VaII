@@ -68,7 +68,8 @@ namespace VaII.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            
+            [DataType(DataType.Text)]
+            [Display(Name = "Email")]
             public string UserName { get; set; }
 
             /// <summary>
@@ -114,7 +115,7 @@ namespace VaII.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                ApplicationUser signedUser = await _userManager.FindByNameAsync(Input.UserName);
+                
                 //var result = await _signInManager.PasswordSignInAsync(,Input.RememberMe, lockoutOnFailure: false);
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
