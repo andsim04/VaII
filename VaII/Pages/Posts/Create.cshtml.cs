@@ -56,6 +56,8 @@ namespace VaII.Pages.Posts
                     {
                         Title = Post.Title,
                         Description = Post.Description,
+                        Published = Post.Published,
+                        Latest = DateTime.Now,
                         ApplicationUserFk = await _userManager.GetUserIdAsync(user),
                         Content = memoryStream.ToArray()
                 };

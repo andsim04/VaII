@@ -28,7 +28,7 @@ namespace VaII.Pages.Posts
             {
                 return NotFound();
             }
-
+            
             var post = await _context.Post.FirstOrDefaultAsync(m => m.ID == id);
 
             if (post == null)

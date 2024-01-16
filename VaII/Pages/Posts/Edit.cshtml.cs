@@ -42,6 +42,7 @@ namespace VaII.Pages.Posts
                 return NotFound();
             }
             Post = post;
+            Post.Content = post.Content;
             return Page();
         }
 
@@ -51,8 +52,13 @@ namespace VaII.Pages.Posts
         {
           
             var memoryStream = new MemoryStream();
+           
             await FileUpload.FormFile.CopyToAsync(memoryStream);
             Post.Content = memoryStream.ToArray();
+            
+
+            Post.Latest = DateTime.Now;
+            
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             Post.ApplicationUserFk = await _userManager.GetUserIdAsync(user);
             

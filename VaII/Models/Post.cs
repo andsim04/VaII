@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Net.Mime;
@@ -24,10 +25,11 @@ namespace VaII_Sem.Models
         [Required]
         public bool Published { get; set; }
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy-hh:mm}", ApplyFormatInEditMode = true)]  
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy-HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayName("Last edit")]
         public DateTime Latest { get; set; } = DateTime.Now;  // po create alebo po uprave sa upravi lastest
+        [DisplayName("Photo")]
         public byte[]? Content { get; set; }
-        public byte[]? ThumImage { get; set; }
 
         
     }
