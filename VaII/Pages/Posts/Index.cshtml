@@ -17,66 +17,68 @@
     <a class="align-content-center" asp-page="Create">Create New</a>
 </div>
 <div class="container border d-flex justify-content-center " style="padding: 10px">
+    <div class="table-responsive-lg">
         <table class="table">
             <thead>
             <tr>
-                <th>
+                <th style="padding: 10px">
                     @Html.DisplayNameFor(model => model.Post[0].Title)
                 </th>
-                <th>
+                    <th style="padding: 10px">
                     @Html.DisplayNameFor(model => model.Post[0].Description)
                 </th>
-                <th>
+                    <th style="padding: 10px">
                     @Html.DisplayNameFor(model => model.Post[0].Published)
-                </th>
-                <th>
+                </th >
+                    <th style="padding: 10px">
                     @Html.DisplayNameFor(model => model.Post[0].Latest)
                 </th>
-                <th>
+                    <th style="padding: 10px">
                     @Html.DisplayNameFor(model => model.Post[0].Content)
                 </th>
-                <th></th>
+                <th class="col-4"></th>
             </tr>
             </thead>
             <tbody>
-  
+
             @foreach (var item in Model.Post)
             {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Published)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Latest)
-                        </td>
-                        @{
-                            if (item.Content != null)
-                            {
-                                WebImage photo = new WebImage(item.Content);
-                                photo.Resize(50, 50, true, true);
-                                var thumbnail = photo.GetBytes();
+                <tr>
+                        <td style="padding: 10px" class="col-2">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                        <td style="padding: 10px" class="col-2">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                        <td style="padding: 10px">
+                        @Html.DisplayFor(modelItem => item.Published)
+                    </td>
+                        <td style="padding: 10px">
+                        @Html.DisplayFor(modelItem => item.Latest)
+                    </td>
+                    @{
+                        if (item.Content != null)
+                        {
+                            WebImage photo = new WebImage(item.Content);
+                            photo.Resize(50, 50, true, true);
+                            var thumbnail = photo.GetBytes();
 
 
-                                <td>
-                                    <img src="data:image;base64,@System.Convert.ToBase64String(thumbnail)"/>
-                                </td>
-                            }
+                            <td>
+                                <img src="data:image;base64,@System.Convert.ToBase64String(thumbnail)"/>
+                            </td>
                         }
+                    }
 
-                    <td class="text-center">
-                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                            <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                        </td>
-                    </tr>
-                
+                        <td class="text-center" style="padding: 10px" >
+                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+
             }
             </tbody>
         </table>
+    </div>
 </div>

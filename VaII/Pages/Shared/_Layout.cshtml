@@ -11,25 +11,36 @@
 <body>
      <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex">
+                
                 <a class="navbar-brand fw-bold" asp-area="" asp-page="/Index">Phots</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-sm-flex">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item flex-grow-1">
+                        <li class="nav-item" >
                             <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
                         </li>
-                        
-                    </ul>
+
+                       
+
+                    </ul> 
+                   
+                </div>
+              
+                <div class="navbar-nav me-auto mb-2 mb-lg-0">
                     <partial name="_LoginPartial"/>
+                    
                 </div>
             </div>
+              
+    
+            
         </nav>
     </header>
     <div class="container-fluid">
@@ -38,10 +49,28 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted text-center">
+    <footer class="border-top footer " >
+       
         <div class="container-fluid">
-           <p class="text-end">VaII-Semka</p>
+            <div class="row">
+                <div class="col-6">
+                    
+                    <div class="form-check form-switch form-check-inline align-content-center">
+                       
+                        <input class="form-check-input " type="checkbox" id="flexSwitchCheckDefault" onclick="setJano()" value="yes">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Night Mode</label>
+                        <script>
+                            setTheme();
+                        </script>
+                            
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p class="text-end">VaII-Semka</p>
+                </div>
+            </div>
         </div>
+    
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

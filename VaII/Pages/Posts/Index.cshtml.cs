@@ -20,10 +20,10 @@ namespace VaII.Pages.Posts
     public class IndexModel : PageModel
     {
         
-        private readonly VaII.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(VaII.Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public IndexModel(Data.ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

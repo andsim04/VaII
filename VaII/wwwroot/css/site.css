@@ -20,4 +20,22 @@ html {
 body {
     margin-bottom: 60px;
     font-family: 'Courier New';
+    background-color: white;
+    color: black;
 }
+
+.dark-mode {
+    background-color: black;
+    color: white;
+    header: black;
+    
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+   
+}
+
+
+

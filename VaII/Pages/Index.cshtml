@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@using System.Web.Helpers;
 @{
     ViewData["Title"] = "Home page";
 }
@@ -7,35 +8,26 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-4">
-            <img alt="Boat on Calm Water"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" />
 
-            <img alt="Wintry Mountain Landscape"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp" />
-        </div>
+    @foreach (var item in Model.Post)
+    {
+        
+            if (item.Content != null)
+            {
+                WebImage photo = new WebImage(item.Content);
+                photo.Resize(500, 500, true, true);
+                var thumbnail = photo.GetBytes();
 
-        <div class="col-lg-4">
-            <img alt="Mountains in the Clouds"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp" />
 
-            <img alt="Boat on Calm Water"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp" />
-        </div>
+                <span>
+                     <a asp-page="./Posts/Details" asp-route-id="@item.ID">
+                     <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(thumbnail)" />
+                    </a>
+                </span>
+            }
+        
 
-        <div class="col-lg-4">
-            <img alt="Waves at Sea"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp" />
+    }
+    
 
-            <img alt="Yosemite National Park"
-                 class="w-100"
-                 src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp" />
-        </div>
     </div>
-</div>
