@@ -4,33 +4,36 @@
 // Write your JavaScript code.
 
 
-function darkMode(boolean) {
-    if (boolean) {
-        element.classList.toggle("dark-mode");
-    } else {
-        element.classList.toggle("light-mode");
-     }
-   
-} 
 
-function setTheme() {
-    íf(localStorage.getItem("night") == true) {
-        darkMode(true);
-        document.getElementById("flexSwitchCheckDefault").checked = true;
-    } else {
-        darkMode(false);
-        document.getElementById("flexSwitchCheckDefault").checked = false;
-    }
-}
 
+//window.onload = setJano2;
 
 function setJano() {
-    var checkbox = document.getElementById("flexSwitchCheckDefault").checked;
-    if (checkbox) {
-        localStorage.setItem("night", true);
+    var element = document.body;
+    var value = localStorage.getItem("night");
+    if (value == 2) {
+        localStorage.setItem("night", 1);
+        element.classList.toggle("light-mode");
 
+    } else if (value == 1) {
+        localStorage.setItem("night", 2);
+        element.classList.toggle("dark-mode");
     } else {
-        localStorage.setItem("night", false);
+        localStorage.setItem("night", 2);
+        element.classList.toggle("dark-mode");
     }
 }
+function setJano2() {
+    var element = document.body;
+    var value = localStorage.getItem("night");
+    if (value == 2) {
+        element.classList.toggle("dark-mode");
+    } else if (value == 1) {
+        element.classList.toggle("light-mode");
+    } else {
+        element.classList.toggle("light-mode");
+    }
+}
+
+
 
