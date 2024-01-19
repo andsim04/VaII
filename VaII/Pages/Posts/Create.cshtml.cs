@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using VaII.Data;
+using Microsoft.EntityFrameworkCore;
+using VaII.Models;
 using VaII_Sem.Models;
 
 namespace VaII.Pages.Posts
@@ -14,9 +11,8 @@ namespace VaII.Pages.Posts
     public class CreateModel : PageModel
     {
         private readonly VaII.Data.ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _hostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         [BindProperty] public FileViewModel FileUpload { get; set; }
 
@@ -27,20 +23,21 @@ namespace VaII.Pages.Posts
             _hostEnvironment = webHostEnvironment;
             _userManager = userManager;
         }
-
         public IActionResult OnGet()
         {
             return Page();
         }
 
         [BindProperty] public Post Post { get; set; } = default!;
+        [BindProperty] public Location Location { get; set; } = default!;
+        [BindProperty] public AdvancedSettings AdvancedSettings { get; set; } = default!;
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             
-            if (!ModelState.IsValid || _context.Post == null || Post == null)
+            if (!ModelState.IsValid || _context.Post == null || Post == null || Location == null)
             {
                 return Page();
             }
@@ -51,6 +48,14 @@ namespace VaII.Pages.Posts
                 await FileUpload.FormFile.CopyToAsync(memoryStream);
                 if (memoryStream.Length < 2097152)
                 {
+                    Location.ID = new Guid();
+                    _context.Add(Location);
+                    var sett = new AdvancedSettings();
+                    
+                    sett = AdvancedSettings;
+                    sett.ID = new Guid();
+                    _context.Add(sett);
+                    
                     var user = await _userManager.FindByNameAsync(User.Identity.Name);
                     var file = new Post()
                     {
@@ -59,8 +64,14 @@ namespace VaII.Pages.Posts
                         Published = Post.Published,
                         Latest = DateTime.Now,
                         ApplicationUserFk = await _userManager.GetUserIdAsync(user),
-                        Content = memoryStream.ToArray()
+                        Content = memoryStream.ToArray(),
+                        Location = Location.ID,
+                        Author = user.UserName
                 };
+                    
+                        AdvancedSettings.ID = sett.ID;
+                        file.Settings = sett.ID;
+                    
                     _context.Post.Add(file);
                     await _context.SaveChangesAsync();
             }

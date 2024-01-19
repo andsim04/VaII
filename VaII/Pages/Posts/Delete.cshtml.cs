@@ -49,13 +49,28 @@ namespace VaII.Pages.Posts
                 return NotFound();
             }
             var post = await _context.Post.FindAsync(id);
+      
 
             if (post != null)
             {
                 Post = post;
+                var sett = await _context.AdvancedSettings.FindAsync(post.Settings);
+                if (sett != null)
+                {
+                    _context.AdvancedSettings.Remove(sett);
+                }
+
+                var loc = await _context.Locations.FindAsync(post.Location);
+                if (loc != null)
+                {
+                    _context.Locations.Remove(loc);
+                }
+                
                 _context.Post.Remove(Post);
                 await _context.SaveChangesAsync();
             }
+
+            
 
             return RedirectToPage("./Index");
         }

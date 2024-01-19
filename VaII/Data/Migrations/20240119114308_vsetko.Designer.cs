@@ -12,8 +12,8 @@ using VaII.Data;
 namespace VaII.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231206132201_Jano")]
-    partial class Jano
+    [Migration("20240119114308_vsetko")]
+    partial class vsetko
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,49 @@ namespace VaII.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("VaII.Models.AdvancedSettings", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Aperture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateShot")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ISOSensitivity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShutterSpeed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AdvancedSettings", (string)null);
+                });
+
+            modelBuilder.Entity("VaII.Models.Location", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Locations", (string)null);
+                });
+
             modelBuilder.Entity("VaII_Sem.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -243,11 +286,12 @@ namespace VaII.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("ApplicationUserFk")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Content")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Description")
@@ -258,12 +302,14 @@ namespace VaII.Data.Migrations
                     b.Property<DateTime>("Latest")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("Location")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("Published")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("ThumImage")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<Guid?>("Settings")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -273,49 +319,6 @@ namespace VaII.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Posts", (string)null);
-                });
-
-            modelBuilder.Entity("VaII_Sem.Models.Settings", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<double?>("Aperture")
-                        .HasColumnType("float");
-
-                    b.Property<string>("DateCreated")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DateShot")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExposureMode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("FocalLength")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ISOSensitivity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Lens")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("ShutterSpeed")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

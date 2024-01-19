@@ -16,8 +16,6 @@ namespace VaII_Sem.Models
         [Required, MinLength(5, ErrorMessage = "Jano :(")]
         
         public override string UserName { get; set; }
-        
-
-        public ICollection<Post>? Posts;
+      
      }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using VaII.Data;
+using VaII.Models;
 using VaII_Sem.Models;
 
 namespace VaII.Pages.Posts
@@ -19,7 +20,9 @@ namespace VaII.Pages.Posts
             _context = context;
         }
 
-      public Post Post { get; set; } = default!; 
+      public Post Post { get; set; } = default!;
+      public Location Location { get; set; } = default!;
+      public AdvancedSettings AdvancedSettings { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,7 +38,12 @@ namespace VaII.Pages.Posts
             }
             else 
             {
+               
                 Post = post;
+                Location? loc = await _context.Locations.FindAsync(Post.Location);
+                Location = loc;
+                AdvancedSettings? advancedSettings = await _context.AdvancedSettings.FindAsync(Post.Settings);
+                AdvancedSettings = advancedSettings;
             }
             return Page();
         }

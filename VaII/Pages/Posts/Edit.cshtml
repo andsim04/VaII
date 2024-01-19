@@ -29,12 +29,47 @@
                     <textarea asp-for="Post.Description" class="form-control" rows="5" ></textarea>
                     <span asp-validation-for="Post.Description" class="text-danger"></span>
                 </div>
+
                 <div class="form-group" style="padding: 10px">
-                    <label asp-for="FileUpload.FormFile" class="form-label">
-                        <input type="file" asp-for="FileUpload.FormFile" class="form-control" accept="image/*" />
-                        <span asp-validation-for="Post.Content" class="text-danger"></span>
-                    </label>
-                    
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="Location.Country" class="control-label "></label>
+                        <input type="text" asp-for="Location.Country" class="form-control"></input>
+                        <span asp-validation-for="Location.Country" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="Location.Place" class="control-label "></label>
+                        <input type="text" asp-for="Location.Place" class="form-control"></input>
+                        <span asp-validation-for="Location.Place" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group" style="padding: 10px">
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="AdvancedSettings.DateShot" class="control-label"></label>
+                        <input type="date" asp-for="AdvancedSettings.DateShot" class="form-control" placeholder="Optional"></input>
+                        <span asp-validation-for="AdvancedSettings.DateShot" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="AdvancedSettings.ShutterSpeed" class="control-label "></label>
+                        <input type="text" asp-for="AdvancedSettings.ShutterSpeed" class="form-control" placeholder="Optional"></input>
+                        <span asp-validation-for="AdvancedSettings.ShutterSpeed" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group" style="padding: 10px">
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="AdvancedSettings.Aperture" class="control-label "></label>
+                        <input type="text" asp-for="AdvancedSettings.Aperture" class="form-control" placeholder="Optional"></input>
+                        <span asp-validation-for="AdvancedSettings.Aperture" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="padding: 10px">
+                        <label asp-for="AdvancedSettings.ISOSensitivity" class="control-label "></label>
+                        <input type="text" asp-for="AdvancedSettings.ISOSensitivity" class="form-control" placeholder="Optional"></input>
+                        <span asp-validation-for="AdvancedSettings.ISOSensitivity" class="text-danger"></span>
+                    </div>
+
                 </div>
                 <div class="form-group form-check text-center" style="padding: 10px">
                     <label class="form-check-label ">

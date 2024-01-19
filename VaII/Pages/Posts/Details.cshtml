@@ -13,12 +13,17 @@
 <div class="col-md-4">
     <div class="row">
         <dl class="container border text-center" style="padding: 10px">
-
             <dt >
                 @Html.DisplayNameFor(model => model.Post.Title)
             </dt>
-            <dd >
+            <dd>
                 @Html.DisplayFor(model => model.Post.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Post.Author)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Post.Author)
             </dd>
             <dt >
                 @Html.DisplayNameFor(model => model.Post.Description)
@@ -27,29 +32,66 @@
                 @Html.DisplayFor(model => model.Post.Description)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.Post.Published)
-                @Html.DisplayFor(model => model.Post.Published)
-            </dt>
-            <dt>
                 @Html.DisplayNameFor(model => model.Post.Latest)
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Post.Latest)
             </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Location.Country)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Location.Country)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Location.Place)
+                </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Location.Place)
+            </dd>
+            @if (Model.AdvancedSettings != null)
+            {
+                <dt >
+                    @Html.DisplayNameFor(model => model.AdvancedSettings.DateShot)
+                </dt>
+                <dd >
+                    @Html.DisplayFor(model => model.AdvancedSettings.DateShot)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AdvancedSettings.Aperture)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AdvancedSettings.Aperture)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AdvancedSettings.ShutterSpeed)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AdvancedSettings.ShutterSpeed)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AdvancedSettings.ISOSensitivity)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AdvancedSettings.ISOSensitivity)
+                </dd>
+            
+            }
+                
         </dl>
     </div>
-        
-    <div class="col-md-4">
+
+        <div class="col-md-4 container border d-flex justify-content-center">
             @{
 
                 if (Model.Post.Content != null)
                 {
                     WebImage photo = new WebImage(Model.Post.Content);
-                    photo.Resize(400, 400, true, true);
+                    //photo.Resize(400, 400, true, true);
                     var thumbnail = photo.GetBytes();
 
 
-                    <img class="mx-auto d-block" src="data:image;base64,@System.Convert.ToBase64String(thumbnail)" />
+                    <img class="m-auto" src="data:image;base64,@System.Convert.ToBase64String(thumbnail)" />
                 
                 }
             }
@@ -60,6 +102,5 @@
 
 
 <div class="text-center">
-    <a asp-page="./Edit" asp-route-id="@Model.Post?.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Pages/Index">Back to Home</a>
 </div>
