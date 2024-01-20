@@ -87,13 +87,13 @@ namespace VaII.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required, MaxLength(20, ErrorMessage = "Too long name :(")]
+            [Required, RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Must contain only letters or too long name!"), MaxLength(20)]
             public string FirstName { get; set; }
 
-            [Required, MaxLength(20, ErrorMessage = "Too long name :(")]
+            [Required, MaxLength(20) , RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$", ErrorMessage = "Must contain only letters or too long name!")]
             public string LastName { get; set; }
             [Required]
-            [DataType(DataType.Text)]
+            [DataType(DataType.Text), StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             public string UserName { get; set; }
 
 

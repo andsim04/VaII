@@ -27,9 +27,20 @@ namespace VaII
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders(); ;
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages(options =>
+            { 
+                options.Conventions.AuthorizeFolder("/Posts");
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
             var app = builder.Build();
+
+            
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

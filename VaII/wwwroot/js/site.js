@@ -4,36 +4,66 @@
 // Write your JavaScript code.
 
 
-
-
-//window.onload = setJano2;
-
 function setJano() {
-    var element = document.body;
+
     var value = localStorage.getItem("night");
     if (value == 2) {
         localStorage.setItem("night", 1);
-        element.classList.toggle("light-mode");
-
+        document.body.classList.remove("dark-theme");
+    
+        localStorage.setItem("tma", "svetlo");
+        document.getElementById("night_button").innerHTML = "Night mode";
+        document.getElementById("night_button").className = "btn btn-dark";
+        
     } else if (value == 1) {
         localStorage.setItem("night", 2);
-        element.classList.toggle("dark-mode");
+        localStorage.setItem("tma", "tma");
+        document.getElementById("night_button").className = "btn btn-light";
+        document.getElementById("night_button").innerHTML = "Light mode";
+        document.body.classList.add("dark-theme");
+    
     } else {
         localStorage.setItem("night", 2);
-        element.classList.toggle("dark-mode");
+        localStorage.setItem("tma", "tma");
+        document.body.classList.add("dark-theme");
+       
+        document.getElementById("night_button").className = "btn btn-light";
+        document.getElementById("night_button").innerHTML = "Night mode";
     }
 }
+
 function setJano2() {
-    var element = document.body;
-    var value = localStorage.getItem("night");
-    if (value == 2) {
-        element.classList.toggle("dark-mode");
-    } else if (value == 1) {
-        element.classList.toggle("light-mode");
+      var value = localStorage.getItem("tma");
+    if (value == "svetlo") {
+        document.body.classList.remove("dark-theme");
+        
+        document.getElementById("night_button").className = "btn btn-dark";
+        document.getElementById("night_button").innerHTML = "Night mode";
+
+    } else if (value == "tma") {
+        document.body.classList.add("dark-theme");
+       
+        ddocument.getElementById("night_button").className = "btn btn-light";
+        document.getElementById("night_button").innerHTML = "Light mode";
     } else {
-        element.classList.toggle("light-mode");
+    document.body.classList.remove("dark-theme");
+     
+    document.getElementById("night_button").className = "btn btn-dark";
+    document.getElementById("night_button").innerHTML = "Night mode";
     }
 }
 
+
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+if (prefersDarkScheme.matches) {
+    document.body.classList.add("dark-theme");
+    document.getElementById("night_button").className = "btn btn-light";
+    document.getElementById("night_button").innerHTML = "Light mode";
+} else {
+    document.body.classList.remove("dark-theme");
+    document.getElementById("night_button").innerHTML = "Night mode";
+    document.getElementById("night_button").className = "btn btn-dark";
+}
 
 

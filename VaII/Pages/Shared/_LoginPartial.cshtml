@@ -1,23 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using VaII_Sem.Models
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+
 
 <ul class="navbar-nav me-auto">
 @if (SignInManager.IsSignedIn(User))
 {
-    
-    <li class="nav-item me-auto">
+    <ul class="nav navbar-nav m-auto">
+    <li class="nav-item">
         <a class="nav-link text-dark align-bottom" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-        <li class="nav-item me-">
-        <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-    <ul class="navbar-nav end-0">
+    
+    
         <li class="nav-item">
         <a class="nav-link text-dark align-content-end" asp-area="" asp-page="/Posts/Index">Your Posts</a>
+    </li>
+    <li class="nav-item">
+    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
+        <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+    </form>
+      </li>
     </ul>
 }
 else

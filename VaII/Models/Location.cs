@@ -8,10 +8,10 @@ namespace VaII.Models
         [Key]
         public Guid ID { get; set; }
 
-        [Required, MaxLength(30)]
+        [Required, MaxLength(30), RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         public string Country { get; set; }
 
-        [Required]
+        [Required, RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         public string Place { get; set; }
 
 
