@@ -12,7 +12,7 @@ using VaII.Data;
 namespace VaII.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240119114308_vsetko")]
+    [Migration("20240121180637_vsetko")]
     partial class vsetko
     {
         /// <inheritdoc />

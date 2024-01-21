@@ -18,12 +18,13 @@
                 photo.Resize(400, 400, true, true);
                 var thumbnail = photo.GetBytes();
 
-
-                <span>
-                     <a asp-page="./Posts/Details" asp-route-id="@item.ID">
-                     <img class="img-fluid" src="data:image;base64,@System.Convert.ToBase64String(thumbnail)" />
-                    </a>
-                </span>
+               
+                <span class="col-2">
+                    <a asp-page="./Posts/Details" asp-route-id="@item.ID">
+                        <img style="padding: 10px" src="data:image;base64,@System.Convert.ToBase64String(thumbnail)" loading="lazy"/></a>
+                    </span>
+                
+                
             }
         
 

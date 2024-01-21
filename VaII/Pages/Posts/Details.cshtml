@@ -19,23 +19,11 @@
             <dd>
                 @Html.DisplayFor(model => model.Post.Title)
             </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Post.Author)
-            </dt>
-            <dd >
-                @Html.DisplayFor(model => model.Post.Author)
-            </dd>
             <dt >
                 @Html.DisplayNameFor(model => model.Post.Description)
             </dt>
             <dd >
                 @Html.DisplayFor(model => model.Post.Description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Post.Latest)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Post.Latest)
             </dd>
                 <dt>
                     @Html.DisplayNameFor(model => model.Location.Country)
@@ -75,6 +63,12 @@
                 <dd>
                     @Html.DisplayFor(model => model.AdvancedSettings.ISOSensitivity)
                 </dd>
+                 <dt>
+                @Html.DisplayNameFor(model => model.Post.Author)
+            </dt>
+            <dd >
+                @Html.DisplayFor(model => model.Post.Author)
+            </dd>
             
             }
                 
@@ -87,7 +81,7 @@
                 if (Model.Post.Content != null)
                 {
                     WebImage photo = new WebImage(Model.Post.Content);
-                    //photo.Resize(400, 400, true, true);
+                    photo.Resize(400, 400, true, true);
                     var thumbnail = photo.GetBytes();
 
 

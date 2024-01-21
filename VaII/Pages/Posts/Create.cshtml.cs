@@ -45,7 +45,11 @@ namespace VaII.Pages.Posts
 
             using (var memoryStream = new MemoryStream())
             {
-                await FileUpload.FormFile.CopyToAsync(memoryStream);
+                if (FileUpload.FormFile != null)
+                {
+                    await FileUpload.FormFile.CopyToAsync(memoryStream);
+                }
+          
                 if (memoryStream.Length < 2097152)
                 {
                     Location.ID = new Guid();
@@ -64,11 +68,14 @@ namespace VaII.Pages.Posts
                         Published = Post.Published,
                         Latest = DateTime.Now,
                         ApplicationUserFk = await _userManager.GetUserIdAsync(user),
-                        Content = memoryStream.ToArray(),
+                        
                         Location = Location.ID,
                         Author = user.UserName
-                };
-                    
+                     }; 
+                    if (FileUpload.FormFile != null)
+                    {
+                        file.Content = memoryStream.ToArray();
+                    }
                         AdvancedSettings.ID = sett.ID;
                         file.Settings = sett.ID;
                     

@@ -6,11 +6,11 @@ namespace VaII_Sem.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required, MaxLength(20, ErrorMessage = "Too long name :("), RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required, MaxLength(20, ErrorMessage = "Too long name :("), RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), MinLength(3)]
         [PersonalData]
         public string FirstName { get; set; }
 
-        [Required,MaxLength(20, ErrorMessage = "Too long name :("), RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
+        [Required,MaxLength(20, ErrorMessage = "Too long name :("), RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), MinLength(3)]
         [PersonalData]
         public string LastName { get; set; }
         [Required, MinLength(5), MaxLength(10)]

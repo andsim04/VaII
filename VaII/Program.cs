@@ -31,6 +31,7 @@ namespace VaII
             { 
                 options.Conventions.AuthorizeFolder("/Posts");
                 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
+                options.Conventions.AllowAnonymousToPage("/Posts/Details");
 
             });
 

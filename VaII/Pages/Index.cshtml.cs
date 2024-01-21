@@ -28,9 +28,9 @@ namespace VaII.Pages
                 IList<Post> UserPosts = new List<Post>();
                 foreach (var post in _context.Posts)
                 {
-                   
+                   if (post.Published) {
                         UserPosts.Add(post);
-                    
+                   }
                 }
 
                 Post = UserPosts.ToList();

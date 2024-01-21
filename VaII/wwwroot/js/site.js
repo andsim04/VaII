@@ -54,16 +54,3 @@ function setJano2() {
 }
 
 
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-if (prefersDarkScheme.matches) {
-    document.body.classList.add("dark-theme");
-    document.getElementById("night_button").className = "btn btn-light";
-    document.getElementById("night_button").innerHTML = "Light mode";
-} else {
-    document.body.classList.remove("dark-theme");
-    document.getElementById("night_button").innerHTML = "Night mode";
-    document.getElementById("night_button").className = "btn btn-dark";
-}
-
-

@@ -75,14 +75,12 @@ namespace VaII.Pages.Posts
             Post.Settings = post.Settings;
             AdvancedSettings.ID = (Guid)Post.Settings;
             Post.Settings = post.Settings;
-            Post.Content = post.Content;
             Post.Latest = DateTime.Now;
             
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             Post.ApplicationUserFk = await _userManager.GetUserIdAsync(user);
             Post.Author = user.UserName;
-            Post.Content = post.Content;
-
+            
 
 
 
@@ -92,7 +90,17 @@ namespace VaII.Pages.Posts
             {
                 return Page();
             }
-
+            var memoryStream = new MemoryStream();
+            if (FileUpload.FormFile != null)
+            {
+                await FileUpload.FormFile.CopyToAsync(memoryStream);
+                Post.Content = memoryStream.ToArray();
+            }
+            else
+            {
+                Post.Content = post.Content;
+                
+            }
             _context.Attach(Location).State = EntityState.Modified;
             _context.Attach(AdvancedSettings).State = EntityState.Modified;
             _context.Attach(Post).State = EntityState.Modified;
